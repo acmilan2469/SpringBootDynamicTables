@@ -1,5 +1,6 @@
 package com.milan.mn.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.milan.mn.model.MasterTable;
+import com.milan.mn.service.DynamicTableServices;
 import com.milan.mn.service.MasterTableService;
 
 @RestController
@@ -21,6 +24,9 @@ public class TestController {
 	
 	@Autowired
 	MasterTableService masterTableService;
+	
+	@Autowired
+	DynamicTableServices dynamicTableServices;
 
 	@PostMapping("/save")
 	public ResponseEntity<MasterTable> testController(@RequestBody MasterTable master) {
@@ -41,5 +47,26 @@ public class TestController {
 	public Object findDynamicTableNames() {
 		return masterTableService.findDynamicTableNames();
 	}
+	
+	@PostMapping("/insertValueToTable/{tableName}")
+	public void insertValueToTable(@RequestBody HashMap<String, Object> map, @PathVariable String tableName) {
+		dynamicTableServices.insertValueToTable(map, tableName);
+	}
+	
+	@GetMapping("/findAllValueFromTable/{tableName}")
+	public Object findAllValueFromTable(@PathVariable String tableName) {
+		return dynamicTableServices.findAllValueFromTable(tableName);
+	}
+	
+	@GetMapping("/findValueFromTableGivenPK/{tableName}/{pk}")
+	public Object findValueFromTableGivenPK(@PathVariable(value = "tableName") String tableName,@PathVariable(value = "pk") String pk) {
+		return dynamicTableServices.findValueFromTableGivenPK(tableName, pk);
+	}
+	
+	@PutMapping("/updateValueToTable/{tableName}/{pk}")
+	public void updateValueToTable(@RequestBody HashMap<String, Object> map, @PathVariable(value = "tableName") String tableName,@PathVariable(value = "pk") String pk) {
+		dynamicTableServices.updateValueToTable(map,tableName, pk);
+	}
+	
 
 }
