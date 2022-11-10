@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.milan.mn.model.MasterTable;
-import com.milan.mn.model.MasterTableDetails;
+import com.milan.mn.model.MasterTableColumnDetails;
 import com.milan.mn.repos.MasterTableRepo;
 
 @Service
@@ -44,6 +44,7 @@ public class DynamicTableServices {
 		}
 		query.replace(query.lastIndexOf(","), query.length(), ")");
 
+		System.out.println(query);
 		EntityTransaction txn = null;
 		try {
 			EntityManager entityManager = emf.createEntityManager();
@@ -67,7 +68,7 @@ public class DynamicTableServices {
 		int count = 0;
 		HashMap<Integer, String> map = new HashMap<>();
 		StringBuilder query = new StringBuilder("Select ");
-		for(MasterTableDetails details : masterTable.get().getMasterTableDetails()) {
+		for(MasterTableColumnDetails details : masterTable.get().getMasterTableColumnDetails()) {
 			map.put(count, details.getColumnName());
 			query.append(details.getColumnName() + ", ");
 			count++;
@@ -126,7 +127,7 @@ public class DynamicTableServices {
 		int count = 0;
 		HashMap<Integer, String> map = new HashMap<>();
 		StringBuilder query = new StringBuilder("Select ");
-		for(MasterTableDetails details : masterTable.get().getMasterTableDetails()) {
+		for(MasterTableColumnDetails details : masterTable.get().getMasterTableColumnDetails()) {
 			map.put(count, details.getColumnName());
 			query.append(details.getColumnName() + ", ");
 			count++;

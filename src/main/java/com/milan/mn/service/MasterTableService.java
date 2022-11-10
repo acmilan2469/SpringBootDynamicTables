@@ -6,11 +6,12 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.milan.mn.dto.MasterTableInput;
 import com.milan.mn.model.MasterTable;
 
 public interface MasterTableService {
 	
-	public ResponseEntity<MasterTable> save(MasterTable masterTable);
+	public ResponseEntity<MasterTable> save(MasterTableInput masterTableInput);
 	public ResponseEntity<List<MasterTable>> findAll();
 	public ResponseEntity<Optional<MasterTable>> findById(int id);
 	public ResponseEntity<HttpStatus> deleteById(int id);

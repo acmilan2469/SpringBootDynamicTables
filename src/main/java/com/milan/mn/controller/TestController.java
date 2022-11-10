@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.milan.mn.dto.MasterTableInput;
 import com.milan.mn.model.MasterTable;
 import com.milan.mn.service.DynamicTableServices;
 import com.milan.mn.service.MasterTableService;
@@ -29,7 +30,7 @@ public class TestController {
 	DynamicTableServices dynamicTableServices;
 
 	@PostMapping("/save")
-	public ResponseEntity<MasterTable> testController(@RequestBody MasterTable master) {
+	public ResponseEntity<MasterTable> testController(@RequestBody MasterTableInput master) {
 		return masterTableService.save(master);
 	}
 	

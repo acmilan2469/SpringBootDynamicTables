@@ -1,5 +1,6 @@
 package com.milan.mn.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,51 +15,35 @@ import javax.persistence.OneToMany;
 public class MasterTable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private boolean dynamicTableCreated;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
 	private String tableName;
+	private String nameOfMaster;
+	private String tableauthMatrix;
+	private boolean active;
+	private String applicationRole;
+	private String dbType;
+	
+	private LocalDateTime createdDate = LocalDateTime.now();
+	private LocalDateTime updatedDate = LocalDateTime.now();
+	private String createdBy;
+	private String updatedBy;
+		
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "master_table_id")
+	private List<MasterTableColumns> masterTableColumns;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "master_table_id")
-	private List<MasterTableDetails> masterTableDetails;
+	private List<MasterTableColumnDetails> masterTableColumnDetails;
 
-	
-
-	public MasterTable() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "MasterTable [id=" + id + ", dynamicTableCreated=" + dynamicTableCreated + ", tableName=" + tableName
-				+ ", masterTableDetails=" + masterTableDetails + "]";
-	}
-
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
-	}
-
-	public MasterTable(int id, boolean dynamicTableCreated, String tableName,
-			List<MasterTableDetails> masterTableDetails) {
-		super();
-		this.id = id;
-		this.dynamicTableCreated = dynamicTableCreated;
-		this.tableName = tableName;
-		this.masterTableDetails = masterTableDetails;
-	}
-
-	public boolean isDynamicTableCreated() {
-		return dynamicTableCreated;
-	}
-
-	public void setDynamicTableCreated(boolean dynamicTableCreated) {
-		this.dynamicTableCreated = dynamicTableCreated;
 	}
 
 	public String getTableName() {
@@ -69,12 +54,101 @@ public class MasterTable {
 		this.tableName = tableName;
 	}
 
-	public List<MasterTableDetails> getMasterTableDetails() {
-		return masterTableDetails;
+	public String getNameOfMaster() {
+		return nameOfMaster;
 	}
 
-	public void setMasterTableDetails(List<MasterTableDetails> masterTableDetails) {
-		this.masterTableDetails = masterTableDetails;
+	public void setNameOfMaster(String nameOfMaster) {
+		this.nameOfMaster = nameOfMaster;
 	}
 
+	public String getTableauthMatrix() {
+		return tableauthMatrix;
+	}
+
+	public void setTableauthMatrix(String tableauthMatrix) {
+		this.tableauthMatrix = tableauthMatrix;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getApplicationRole() {
+		return applicationRole;
+	}
+
+	public void setApplicationRole(String applicationRole) {
+		this.applicationRole = applicationRole;
+	}
+
+	public String getDbType() {
+		return dbType;
+	}
+
+	public void setDbType(String dbType) {
+		this.dbType = dbType;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public List<MasterTableColumns> getMasterTableColumns() {
+		return masterTableColumns;
+	}
+
+	public void setMasterTableColumns(List<MasterTableColumns> masterTableColumns) {
+		this.masterTableColumns = masterTableColumns;
+	}
+
+	public List<MasterTableColumnDetails> getMasterTableColumnDetails() {
+		return masterTableColumnDetails;
+	}
+
+	public void setMasterTableColumnDetails(List<MasterTableColumnDetails> masterTableColumnDetails) {
+		this.masterTableColumnDetails = masterTableColumnDetails;
+	}
+
+	@Override
+	public String toString() {
+		return "MasterTable [id=" + id + ", tableName=" + tableName + ", nameOfMaster=" + nameOfMaster
+				+ ", tableauthMatrix=" + tableauthMatrix + ", active=" + active + ", applicationRole=" + applicationRole
+				+ ", dbType=" + dbType + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
+				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", masterTableColumns=" + masterTableColumns
+				+ ", masterTableColumnDetails=" + masterTableColumnDetails + "]";
+	} 
+	
 }
