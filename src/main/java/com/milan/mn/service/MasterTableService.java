@@ -17,4 +17,5 @@ public interface MasterTableService {
 	public ResponseEntity<HttpStatus> deleteById(int id);
 	public ResponseEntity<MasterTable> update(MasterTable masterTable);
 	public Object findDynamicTableNames();
+	public Object findDetailsFromTableName(String tableName);
 }

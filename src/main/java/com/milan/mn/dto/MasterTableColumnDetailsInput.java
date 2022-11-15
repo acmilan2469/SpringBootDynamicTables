@@ -11,7 +11,7 @@ public class MasterTableColumnDetailsInput {
 	private String columnValidations;
 	private String customValidations;
 	private boolean mandatory = true;
-	private boolean primaryKey;
+	private boolean primaryKey = false;
 
 	public String getColumnName() {
 		return columnName;

@@ -2,6 +2,7 @@ package com.milan.mn.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -36,8 +37,6 @@ public class MasterTableServiceImpl implements MasterTableService {
 	@Override
 	public ResponseEntity<MasterTable> save(MasterTableInput masterTableInput) {
 		MasterTable masterTable = convertToMasterTable(masterTableInput);
-		System.out.println(masterTableInput);
-		System.out.println(masterTable);
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append("Master Table Successfully Saved and DynamicTable=");
@@ -174,6 +173,30 @@ public class MasterTableServiceImpl implements MasterTableService {
 	public Object findDynamicTableNames() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Object findDetailsFromTableName(String tableName) {
+		Optional<MasterTable> masterTable = masterTableRepo.findByTableName(tableName);
+		List<MasterTableColumnDetailsInput> columnDetails = new ArrayList<>();
+		
+		for(MasterTableColumnDetails details : masterTable.get().getMasterTableColumnDetails()) {
+			if (details.isPrimaryKey() == false) {
+				MasterTableColumnDetailsInput masterTableColumnDetailsInput = new MasterTableColumnDetailsInput(); 
+				masterTableColumnDetailsInput.setColumnName(details.getColumnName());
+				masterTableColumnDetailsInput.setColumnDataType(details.getColumnDataType());
+				masterTableColumnDetailsInput.setColumnMinLength(details.getColumnMinLength());
+				masterTableColumnDetailsInput.setColumnMaxLength(details.getColumnMaxLength());
+				masterTableColumnDetailsInput.setFieldType(details.getFieldType());
+				masterTableColumnDetailsInput.setFieldText(details.getFieldText());
+				masterTableColumnDetailsInput.setColumnValidations(details.getColumnValidations());
+				masterTableColumnDetailsInput.setCustomValidations(details.getCustomValidations());
+				masterTableColumnDetailsInput.setMandatory(details.isMandatory());
+				masterTableColumnDetailsInput.setPrimaryKey(false);
+				columnDetails.add(masterTableColumnDetailsInput);
+			}			
+		}
+		return columnDetails;
 	}
 
 	

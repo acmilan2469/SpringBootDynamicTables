@@ -49,6 +49,11 @@ public class TestController {
 		return masterTableService.findDynamicTableNames();
 	}
 	
+	@GetMapping("/findDetailsFromTableName/{tableName}")
+	public Object findDetailsFromTableName(@PathVariable String tableName) {
+		return masterTableService.findDetailsFromTableName(tableName);
+	}
+	
 	@PostMapping("/insertValueToTable/{tableName}")
 	public void insertValueToTable(@RequestBody HashMap<String, Object> map, @PathVariable String tableName) {
 		dynamicTableServices.insertValueToTable(map, tableName);

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+<style>
+.button {
+	border: none;
+	color: white;
+	padding: 10px 26px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 3px 2px;
+	cursor: pointer;
+}
+
+.button1 {
+	background-color: #4CAF50;
+} /* Green */
+.button2 {
+	background-color: #008CBA;
+} /* Blue */
+</style>
+    <script type="text/javascript" src="/js/addMasterTable.js"></script>
+</head>
+
+<body>
+
+	<h2>Add:</h2>
+
+	<form id="addMasterTableForm">
+		<div>
+			<label for="tableName">Table Name:</label><br> <input type="text"
+				id="tableName" name="tableName"><br>
+		</div>
+		<br>
+		<div>
+			<label for="nameOfMaster">Master Name:</label><br> <input type="text"
+				id="nameOfMaster" name="nameOfMaster"><br>
+		</div>
+		<br>
+		<div>
+			<label for="active">Active/Inactive:</label><br> <input type="text"
+				id="active" name="active">
+		</div>
+		<br>
+		<div>
+			<label for="applicationRole">Application Role:</label><br> <input
+				type="text" id="applicationRole" name="applicationRole"><br>
+		</div>
+		<br>
+		<div>
+			<label for="dbType">Database Type:</label><br> <input type="text"
+				id="dbType" name="dbType"><br>
+		</div>
+		<br>
+
+		<div id="childrenSection">
+
+			<table id="columntable">
+				<tr>
+					<th>Column Name</th>
+					<th>Data Type</th>
+					<th>Column Validation</th>
+					<th>Custom Validation</th>
+					<th>Field Type</th>
+					<th>Field Text</th>
+					<th>Column Min-Length</th>
+					<th>Column Max-Length</th>
+					<th>Mandatory</th>
+				</tr>
+				<tr>
+					<td id="col0"><input type="text" name="column-name[]" value="" /></td>
+					<td id="col1"><input type="text" name="data-type[]" value="" /></td>
+					<td id="col2"><input type="text" name="col-validation[]" value="" /></td>
+					<td id="col3"><input type="text" name="custom-validation[]" value="" /></td>
+					<td id="col4"><input type="text" name="field-type[]" value="" /></td>
+					<td id="col5"><input type="text" name="field-text[]" value="" /></td>
+					<td id="col6"><input type="number" name="col-min-length[]" /></td>
+					<td id="col7"><input type="number" name="col-min-length[]" /></td>
+					<!--<td id="col7"><select name="department[]" id="dept">
+							<option value="0">Select </option>
+							<option value="1">Sales</option>
+					</select></td>-->
+					<td id="col8">
+						<input type="radio" name="is-mandatory[0]" value="true" />True
+						<input type="radio" name="is-mandatory[1]" value="false" />False
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><input type="button" value="Add Row" onclick="addRows();" /></td>
+					<td><input type="button" value="Delete Row"
+						onclick="deleteRows();" /></td>
+					<td>
+				</tr>
+			</table>
+
+		</div>
+
+
+		<button class="button button1" onclick="saveMasterTable();">Save</button>
+		<br> <br>
+
+	</form>
+</body>
+</html>
