@@ -2,7 +2,10 @@
 <html xmlns:th="https://www.thymeleaf.org/">
 
 <head>
-<style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style>
 .button {
 	border: none;
 	color: white;
@@ -22,6 +25,7 @@
 	background-color: #008CBA;
 } /* Blue */
 </style>
+	<script src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/addMasterTable.js"></script>
 </head>
 
@@ -58,7 +62,7 @@
 
 		<div id="childrenSection">
 
-			<table id="columntable">
+				<table id="column-table">
 				<tr>
 					<th>Column Name</th>
 					<th>Data Type</th>
@@ -69,23 +73,33 @@
 					<th>Column Min-Length</th>
 					<th>Column Max-Length</th>
 					<th>Mandatory</th>
+					<th>Primary Key</th>
 				</tr>
 				<tr>
-					<td id="col0"><input type="text" name="column-name[]" value="" /></td>
-					<td id="col1"><input type="text" name="data-type[]" value="" /></td>
-					<td id="col2"><input type="text" name="col-validation[]" value="" /></td>
-					<td id="col3"><input type="text" name="custom-validation[]" value="" /></td>
-					<td id="col4"><input type="text" name="field-type[]" value="" /></td>
-					<td id="col5"><input type="text" name="field-text[]" value="" /></td>
-					<td id="col6"><input type="number" name="col-min-length[]" /></td>
-					<td id="col7"><input type="number" name="col-min-length[]" /></td>
-					<!--<td id="col7"><select name="department[]" id="dept">
-							<option value="0">Select </option>
-							<option value="1">Sales</option>
-					</select></td>-->
+					<td id="col0"><input type="text" name="column-name" value="" /></td>
+					<td id="col1"><input type="text" name="data-type" value="" /></td>
+					<td id="col2"><input type="text" name="col-validation" value="" /></td>
+					<td id="col3"><input type="text" name="custom-validation" value="" /></td>
+					<td id="col4"><input type="text" name="field-type" value="" /></td>
+					<td id="col5"><input type="text" name="field-text" value="" /></td>
+					<td id="col6"><input type="number" name="col-min-length" /></td>
+					<td id="col7"><input type="number" name="col-max-length" /></td>
+
 					<td id="col8">
-						<input type="radio" name="is-mandatory[0]" value="true" />True
-						<input type="radio" name="is-mandatory[1]" value="false" />False
+						<select class="form-control" name="is-mandatory" style="width: 250px;">
+							<option>False</option>
+							<option>True</option>
+						</select>
+						<!--<input type="radio" name="is-mandatory[0]" value="true" />True
+						<input type="radio" name="is-mandatory[1]" value="false" />False-->
+					</td>
+					<td id="col9">
+						<select class="form-control" name="primary-key" style="width: 250px;">
+							<option>False</option>
+							<option>True</option>
+						</select>
+						<!--<input type="radio" name="is-mandatory[0]" value="true" />True
+						<input type="radio" name="is-mandatory[1]" value="false" />False-->
 					</td>
 				</tr>
 			</table>
@@ -101,9 +115,10 @@
 		</div>
 
 
-		<button class="button button1" onclick="saveMasterTable();">Save</button>
-		<br> <br>
+
+		<br>
 
 	</form>
+	<button class="button button1" onclick="saveMasterTable1();">Save</button>
 </body>
 </html>

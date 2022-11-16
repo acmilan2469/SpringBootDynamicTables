@@ -16,7 +16,7 @@ public class MasterTableColumnDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long columnId;
-	private String columnName;
+private String columnName;
 	private String columnDataType;
 	private long columnMinLength;
 	private long columnMaxLength;
