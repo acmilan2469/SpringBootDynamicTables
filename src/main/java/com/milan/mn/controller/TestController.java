@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,13 @@ public class TestController {
 	@PostMapping("/save")
 	public ResponseEntity<MasterTable> testController(@RequestBody MasterTableInput master) {
 		return masterTableService.save(master);
+	}
+
+	@PostMapping("/test")
+	public ResponseEntity<MasterTableInput> testC(@RequestBody MasterTableInput master) {
+		System.out.println(master);
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(master, headers, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/findAll")

@@ -1,0 +1,88 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+	<style>
+            table,
+            th,
+            td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+
+            th,
+            td {
+              padding: 20px;
+            }
+
+            th {
+              text-align: left;
+            }
+
+            .button {
+              border: none;
+              color: white;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+              background-color: #4CAF50;
+            }
+  	</style>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.dataTables.min.js"> </script>
+	<script type="text/javascript" src="/js/addMasterTable.js"></script>
+</head>
+
+<body>
+<div class="col-5">
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-info text-center text-white">
+				<h3>List Of Master-Table: </h3>
+			</div>
+			<div>
+				<table id="masterTableForTableList" style="width:80%">
+					<thead>
+					<tr>
+						<th>ID</th>
+						<th>TableName</th>
+						<th>MasterName</th>
+						<th>Active/Inactive</th>
+						<th>CreatedBy</th>
+						<th>Add Table Data</th>
+						<!--<th>Table-CRUD</th>-->
+					</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+					<!--<tr th:each="obj:${list}">
+						<td th:text="${obj.id}"></td>
+						<td th:text="${obj.name}"></td>
+						<td th:text="${obj.address}"></td>
+						<td th:text="${obj.age}"></td>
+						<td>
+							<a th:href="@{/employee/edit(id=${obj.id})}" style="color:blue;">EDIT </a>
+							<a th:href="@{/employee/delete(id=${obj.id})}" style="color:red;">DELETE</a>
+						</td>
+					</tr>-->
+				</table>
+				<br><br><br>
+				<a href="/app">
+					<button class="button">Home     </button>
+				</a>
+				<a href="/app/addMasterTable">
+					<button class="button">Add Master-Table </button>
+				</a>
+			</div>
+			<div>
+				<span></span>
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>
