@@ -22,6 +22,16 @@ public class UrlController {
 	public String addMasterTable() {
 		return "addMasterTable";
 	}
+
+	@GetMapping("/app/editMasterTable")
+	public String editMasterTable() {
+		return "editMasterTable";
+	}
+
+	@GetMapping("/app/masterTableList")
+	public String masterTableList() {
+		return "masterTableList";
+	}
 	
 	
 }

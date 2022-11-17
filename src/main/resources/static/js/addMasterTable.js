@@ -1,3 +1,81 @@
+$(document).ready( function () {
+    $.ajax({
+        url: '/app/findAll',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            addValueToMasterTableList(data)
+        }
+    });
+
+    /*$.ajax({
+        type: "GET",
+        url: concatenatedUrl,
+        data: {input:input},
+        success: function (data) {
+          $result.val(newValue);
+        }
+    });*/
+
+	/*ajax("/app/findAll" , "" , function(response){
+
+		addValueToMasterTableList(data)
+	}, "GET");*/
+});
+
+function addValueToMasterTableList(data){
+
+	var i = 0;
+	jQuery(function($) {
+		var roleTable = $('#masterTableForTableList')
+        .DataTable
+        ({
+            "responsive" : true,
+            "lengthChange": false,
+            "destroy": true,
+
+            /* "paging": false, */
+
+            data : data,
+
+
+            "columns" : [{
+                "render" : function(data, type, row) {
+                    i+=1;
+                    return i
+                }
+            }, {
+                "data" : "tableName"
+            },
+            {
+                "data" : "nameOfMaster"
+            },
+            {
+                "data" : "active"
+            },
+            {
+                "data" : "createdBy"
+            },
+
+            {
+                data : null,
+                "render" : function(data, meta, full) {
+                    return "<a href='/app/addMasterTable' onClick='addDataToDynamicTable("
+                    + JSON.stringify(full)
+                    + ")'>Add Data </a> "
+                }
+            }
+            ]
+        });
+	})
+}
+
+function addDataToDynamicTable(data){
+    console.log("*******************************");
+    console.log(data);
+    console.log("*******************************");
+}
+
 function addRows() {
 	var table = document.getElementById('column-table');
 	var rowCount = table.rows.length;
@@ -8,15 +86,6 @@ function addRows() {
 		cell = row.insertCell(i);
 		var copycel = document.getElementById('col' + i).innerHTML;
 		cell.innerHTML = copycel;
-		/*if (i == 8 || i == 9)  {
-			var radioinput = document.getElementById('col8').getElementsByTagName('input');
-			for (var j = 0; j <= radioinput.length; j++) {
-				if (radioinput[j].type == 'radio') {
-					var rownum = rowCount;
-					radioinput[j].name = 'is-mandatory[' + rownum + ']';
-				}
-			}
-		}*/
 	}
 }
 function deleteRows() {
@@ -31,44 +100,7 @@ function deleteRows() {
 	}
 }
 
-function saveMasterTable() {
-
-    var myRows = [];
-    var data = $('#column-table tr').map(function() {
-        var obj = {};
-        $(this).find('input, select').each(function() {
-            obj[this.name] = $(this).val();
-        });
-        return obj;
-    }).get();
-    console.log(data);
-
-
-
-
-
-
-	//for getting dynamic employee
-	//var nameValue = document.getElementById("regForm").value;
-//	console.log(document.getElementById("tableName").value);
-//	var data = {
-//		tableName: tableName.value,
-//		nameOfMaster: nameOfMaster.value,
-//		active: active.value,
-//		nameOfMaster: nameOfMaster.value,
-//		dbType: dbType.value,
-//
-//	};
-//	console.log(data);
-//
-	
-
-
-
-}
-
 function saveMasterTable1() {
-
     let res = [];
     let columnName = document.getElementsByName("column-name");
     let dataType = document.getElementsByName("data-type");
@@ -121,11 +153,7 @@ function saveMasterTable1() {
         type: 'post',
         data: JSON.stringify(dataVal),
         success: function(response){
-            console.log("++++++++++++++++++++++++");
             console.log(response)
-            console.log("++++++++++++++++++++++++");
        }
     });
-
 }
-
