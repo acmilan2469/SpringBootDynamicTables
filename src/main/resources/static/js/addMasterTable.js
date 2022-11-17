@@ -1,80 +1,10 @@
 $(document).ready( function () {
-    $.ajax({
-        url: '/app/findAll',
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            addValueToMasterTableList(data)
-        }
-    });
-
-    /*$.ajax({
-        type: "GET",
-        url: concatenatedUrl,
-        data: {input:input},
-        success: function (data) {
-          $result.val(newValue);
-        }
-    });*/
-
-	/*ajax("/app/findAll" , "" , function(response){
-
-		addValueToMasterTableList(data)
-	}, "GET");*/
+    alert("addMasterTable.js called!");
+    console.log("local storage data : ",localStorage.getItem("data"));
+    
 });
 
-function addValueToMasterTableList(data){
 
-	var i = 0;
-	jQuery(function($) {
-		var roleTable = $('#masterTableForTableList')
-        .DataTable
-        ({
-            "responsive" : true,
-            "lengthChange": false,
-            "destroy": true,
-
-            /* "paging": false, */
-
-            data : data,
-
-
-            "columns" : [{
-                "render" : function(data, type, row) {
-                    i+=1;
-                    return i
-                }
-            }, {
-                "data" : "tableName"
-            },
-            {
-                "data" : "nameOfMaster"
-            },
-            {
-                "data" : "active"
-            },
-            {
-                "data" : "createdBy"
-            },
-
-            {
-                data : null,
-                "render" : function(data, meta, full) {
-                    return "<a href='/app/addMasterTable' onClick='addDataToDynamicTable("
-                    + JSON.stringify(full)
-                    + ")'>Add Data </a> "
-                }
-            }
-            ]
-        });
-	})
-}
-
-function addDataToDynamicTable(data){
-    console.log("*******************************");
-    console.log(data);
-    console.log("*******************************");
-}
 
 function addRows() {
 	var table = document.getElementById('column-table');

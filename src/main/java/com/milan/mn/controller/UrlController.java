@@ -32,6 +32,11 @@ public class UrlController {
 	public String masterTableList() {
 		return "masterTableList";
 	}
-	
+
+	@GetMapping("/app/addDataToTable")
+	public String addDataToTable() {
+		return "addDataToTable";
+	}
+
 	
 }

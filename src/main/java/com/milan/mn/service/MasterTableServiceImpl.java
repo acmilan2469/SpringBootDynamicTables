@@ -31,6 +31,9 @@ public class MasterTableServiceImpl implements MasterTableService {
 	@Autowired
 	MasterTableRepo masterTableRepo;
 
+	@Autowired
+	DynamicTableServices dynamicTableServices;
+
 	@PersistenceUnit
 	private EntityManagerFactory emf;
 
@@ -176,8 +179,13 @@ public class MasterTableServiceImpl implements MasterTableService {
 	}
 
 	@Override
-	public Object findDetailsFromTableName(String tableName) {
+	public ResponseEntity findDetailsFromTableName(String tableName) {
+
 		Optional<MasterTable> masterTable = masterTableRepo.findByTableName(tableName);
+
+		if (!masterTable.isPresent())
+			return new ResponseEntity("the table doesn't exist",HttpStatus.BAD_REQUEST);
+
 		List<MasterTableColumnDetailsInput> columnDetails = new ArrayList<>();
 		
 		for(MasterTableColumnDetails details : masterTable.get().getMasterTableColumnDetails()) {
@@ -188,7 +196,11 @@ public class MasterTableServiceImpl implements MasterTableService {
 				masterTableColumnDetailsInput.setColumnMinLength(details.getColumnMinLength());
 				masterTableColumnDetailsInput.setColumnMaxLength(details.getColumnMaxLength());
 				masterTableColumnDetailsInput.setFieldType(details.getFieldType());
-				masterTableColumnDetailsInput.setFieldText(details.getFieldText());
+				if (details.getFieldType().equalsIgnoreCase("master")){
+					masterTableColumnDetailsInput.setFieldText(getMasterTableValues(details.getFieldText()));
+				}
+				else
+					masterTableColumnDetailsInput.setFieldText(details.getFieldText());
 				masterTableColumnDetailsInput.setColumnValidations(details.getColumnValidations());
 				masterTableColumnDetailsInput.setCustomValidations(details.getCustomValidations());
 				masterTableColumnDetailsInput.setMandatory(details.isMandatory());
@@ -196,9 +208,12 @@ public class MasterTableServiceImpl implements MasterTableService {
 				columnDetails.add(masterTableColumnDetailsInput);
 			}			
 		}
-		return columnDetails;
+		return ResponseEntity.ok(columnDetails);
 	}
 
-	
+	private String getMasterTableValues(String tableName){
+		Object allValueFromTable = dynamicTableServices.findAllValueFromTable(tableName);
+		return allValueFromTable.toString();
+	}
 
 }
