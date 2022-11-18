@@ -1,6 +1,13 @@
 $(document).ready( function () {
     alert("addMasterTable.js called!");
     console.log("local storage data : ",localStorage.getItem("data"));
+
+    $('#field-type option').each(function() {
+        if ($(this).isChecked())
+           alert('this option is selected');
+         else
+           alert('this is not');
+    });
     
 });
 

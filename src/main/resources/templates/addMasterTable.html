@@ -4,34 +4,32 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<style>
-.button {
-	border: none;
-	color: white;
-	padding: 10px 26px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 14px;
-	margin: 3px 2px;
-	cursor: pointer;
-}
+		.button {
+			border: none;
+			color: white;
+			padding: 10px 26px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 14px;
+			margin: 3px 2px;
+			cursor: pointer;
+		}
 
-.button1 {
-	background-color: #4CAF50;
-} /* Green */
-.button2 {
-	background-color: #008CBA;
-} /* Blue */
-</style>
+		.button1 {
+			background-color: #4CAF50;
+		} /* Green */
+		.button2 {
+			background-color: #008CBA;
+		} /* Blue */
+	</style>
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery.dataTables.min.js"> </script>
     <script type="text/javascript" src="/js/addMasterTable.js"></script>
 </head>
 
 <body>
-
 	<h2>Add:</h2>
 
 	<form id="addMasterTableForm">
@@ -62,7 +60,6 @@
 		<br>
 
 		<div id="childrenSection">
-
 				<table id="column-table">
 				<tr>
 					<th>Column Name</th>
@@ -70,7 +67,7 @@
 					<th>Column Validation</th>
 					<th>Custom Validation</th>
 					<th>Field Type</th>
-					<th>Field Text</th>
+					<th>Field Value</th>
 					<th>Column Min-Length</th>
 					<th>Column Max-Length</th>
 					<th>Mandatory</th>
@@ -81,8 +78,16 @@
 					<td id="col1"><input type="text" name="data-type" value="" /></td>
 					<td id="col2"><input type="text" name="col-validation" value="" /></td>
 					<td id="col3"><input type="text" name="custom-validation" value="" /></td>
-					<td id="col4"><input type="text" name="field-type" value="" /></td>
-					<td id="col5"><input type="text" name="field-text" value="" /></td>
+					<td id="col4">
+						<select name="field-type" id="field-type">
+							<option value="Text">Text</option>
+							<option value="Dropdown">Dropdown</option>
+							<option value="MasterTable">MasterTable</option>
+						</select>
+					</td>
+					<td id="col5">
+						<input type="text" name="field-text" value="" />
+					</td>
 					<td id="col6"><input type="number" name="col-min-length" /></td>
 					<td id="col7"><input type="number" name="col-max-length" /></td>
 
@@ -91,16 +96,12 @@
 							<option>False</option>
 							<option>True</option>
 						</select>
-						<!--<input type="radio" name="is-mandatory[0]" value="true" />True
-						<input type="radio" name="is-mandatory[1]" value="false" />False-->
 					</td>
 					<td id="col9">
 						<select class="form-control" name="primary-key" style="width: 250px;">
 							<option>False</option>
 							<option>True</option>
 						</select>
-						<!--<input type="radio" name="is-mandatory[0]" value="true" />True
-						<input type="radio" name="is-mandatory[1]" value="false" />False-->
 					</td>
 				</tr>
 			</table>
@@ -112,13 +113,7 @@
 					<td>
 				</tr>
 			</table>
-
-		</div>
-
-
-
-		<br>
-
+		</div><br>
 	</form>
 	<button class="button button1" onclick="saveMasterTable1();">Save</button>
 </body>
